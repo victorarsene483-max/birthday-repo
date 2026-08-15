@@ -82,3 +82,30 @@ document.getElementById('open-message-btn').addEventListener('click', () => {
 document.getElementById('back-btn').addEventListener('click', () => {
   showHomePage();
 });
+const music = document.getElementById('bg-music');
+const toggleBtn = document.getElementById('music-toggle');
+const icon = document.getElementById('music-icon');
+
+music.volume = 0.2; // low volume, adjust 0.0–1.0
+let isPlaying = false;
+
+// Try silent autoplay on load (browsers allow muted autoplay)
+window.addEventListener('load', () => {
+  music.muted = true;
+  music.play().catch(() => {
+    // even muted autoplay was blocked, that's fine — user can tap the button
+  });
+});
+
+toggleBtn.addEventListener('click', () => {
+  if (!isPlaying) {
+    music.muted = false;
+    music.play();
+    icon.textContent = '🔊';
+    isPlaying = true;
+  } else {
+    music.pause();
+    icon.textContent = '🔇';
+    isPlaying = false;
+  }
+});
