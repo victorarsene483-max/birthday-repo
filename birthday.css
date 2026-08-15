@@ -52,14 +52,6 @@ body {
     scroll-behavior: auto;
   }
 }
-#page-message {
-  display: none;
-}
-
-#page-home.active,
-#page-message.active {
-  display: block;
-}
 
 .grid-bg {
   position: absolute;
@@ -251,6 +243,7 @@ section {
 #music-toggle:hover {
   box-shadow: 0 0 18px rgba(255, 0, 60, 0.9);
   transform: scale(1.05);
+}
 
 .btn {
   display: block;
