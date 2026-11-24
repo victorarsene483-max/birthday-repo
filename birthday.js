@@ -66,13 +66,13 @@ cards.forEach((c, i) => c.style.setProperty('--d', (i % 2) * 0.12 + 's'));
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .2 });
 cards.forEach(c => io.observe(c));
 
-
+/* ---------- pages ---------- */
 const pageHome = $('#page-home');
 const pageMessage = $('#page-message');
 function showMessagePage() { pageHome.classList.remove('active'); pageMessage.classList.add('active'); window.scrollTo(0, 0); }
 function showHomePage() { pageMessage.classList.remove('active'); pageHome.classList.add('active'); window.scrollTo(0, 0); }
 
-
+/* ---------- message typing (tap the card to skip) ---------- */
 const msgEls = Array.from(document.querySelectorAll('.msg-card p, .msg-card .msg-close'));
 const msgTexts = msgEls.map(el => el.textContent);
 const afterMsg = $('#after-msg');
@@ -89,7 +89,6 @@ function typeMessage() {
   const myRun = ++runId;
   afterMsg.classList.remove('show');
   msgEls.forEach(el => { el.textContent = ''; });
-  if (reduce) return finishTyping();
   let elIndex = 0;
 
   function typeElement() {
@@ -118,7 +117,7 @@ $('#open-message-btn').addEventListener('click', e => { sparkle(...centerOf(e.cu
 $('#back-btn').addEventListener('click', () => { runId++; showHomePage(); });
 $('#msg-card').addEventListener('click', finishTyping);
 
-
+/* ---------- music ---------- */
 const music = $('#bg-music'), toggleBtn = $('#music-toggle'), icon = $('#music-icon');
 music.volume = 0.2;
 let isPlaying = false;
@@ -128,7 +127,7 @@ toggleBtn.addEventListener('click', () => {
   else { music.pause(); icon.textContent = '🔇'; isPlaying = false; }
 });
 
-
+/* ---------- MAKE A WISH ---------- */
 const dlg = $('#wish-dialog'), input = $('#wish-input'), sendBtn = $('#wish-send'), count = $('#wish-count');
 const wishLog = $('#wish-log'), wishList = $('#wish-list'), toast = $('#toast');
 const KEY = 'birthday-wishes';
@@ -169,7 +168,7 @@ sendBtn.addEventListener('click', () => {
   const text = input.value.trim(); if (!text) return;
   dlg.close();
 
-
+  // the wish floats up in its own bubble, then bursts
   const wb = document.createElement('div');
   wb.className = 'wish-bubble'; wb.textContent = text;
   document.body.appendChild(wb);
@@ -186,7 +185,7 @@ sendBtn.addEventListener('click', () => {
 
 $('#clear-wishes').addEventListener('click', () => { wishes = []; save(); renderWishes(); });
 
-
+// No backend needed: share sheet on phones, clipboard fallback on desktop
 $('#share-wishes').addEventListener('click', async () => {
   const msg = 'My birthday wishes 🎂\n' + wishes.map((w, i) => `${i + 1}. ${w}`).join('\n');
   try {
@@ -197,11 +196,12 @@ $('#share-wishes').addEventListener('click', async () => {
 
 renderWishes();
 
-
+/* ---------- LOAD SEQUENCE ---------- */
+// "Tap to open" doubles as the user gesture browsers need to allow music with sound.
 $('#enter').addEventListener('click', e => {
   const [x, y] = centerOf(e.currentTarget);
   sparkle(x, y, 24);
-  document.body.classList.add('ready');
+  document.body.classList.add('ready');          // starts the hero sequence
   $('#splash').classList.add('leaving');
   setTimeout(() => $('#splash').remove(), 1000);
   if (!reduce) for (let k = 0; k < 12; k++) setTimeout(() => bubble(24 + Math.random() * 60, Math.random() * 100, 5 + Math.random() * 4), k * 70);
