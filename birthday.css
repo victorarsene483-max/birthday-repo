@@ -1,487 +1,152 @@
-#page-home,
-#page-message {
-  display: none;
-}
 
-#page-home.active,
-#page-message.active {
-  display: block;
-}
-:root {
-  --bg: #0a0a16;
-  --card: #12122a;
-  --card-line: rgba(139, 124, 255, 0.18);
-  --violet: #9b6bff;
-  --violet-2: #6d5bff;
-  --pink: #ff5fa8;
-  --cyan: #29e0e0;
-  --green: #35e08a;
-  --orange: #ffa64d;
-  --blue: #5b9bff;
-  --text: #eef0ff;
-  --text-dim: #9a9ab8;
-  --radius: 18px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Day For You</title>
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="birthday.css">
+</head>
+<body>
+<div id="splash">
+  <div class="orb" aria-hidden="true"><span>🎂</span></div>
+  <p class="splash-line">A little something for you</p>
+  <button type="button" id="enter" class="btn btn-primary">Tap to open</button>
+</div>
+<div class="torch" aria-hidden="true"></div>
+<div id="bubbles" aria-hidden="true"></div>
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+<div id="page-home" class="active">
 
-html {
-  scroll-behavior: smooth;
-}
+  <section id="hero">
+    <div class="content-layer">
+      <div class="eyebrow">A day for you</div>
+      <h1 class="hero-title" aria-label="Happy Birthday"><span class="ln">Happy</span><span class="ln">Birthday</span></h1>
+      <div class="hero-rule"></div>
+      <p class="hero-sub">Pop a few bubbles on your way down.</p>
 
-body {
-  background-image:url("spongebob 5k.(2).webp") ;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 400dvh;
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
-.background-image{
-  opacity: 60%;
-}
+      <div class="mock-wrap">
+        <div class="mock-corner tl"></div>
+        <div class="mock-corner tr"></div>
+        <div class="mock-card">
+          <div class="mock-eyebrow">✦ happy birthday</div>
+          <div class="mock-name">To <span id="mock-name-text">My Screen Soulmate🤗</span></div>
+          <div class="mock-tag">Bestieeeee😉</div>
+          <div class="mock-heart">❤</div>
+          <div class="mock-body">On your special day, I just want to share something as unique and beautiful as you are — a small reminder of how much you mean to me, and how lucky I am to walk through life beside you.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
+  <audio id="bg-music" loop preload="auto">
+    <source src="Sally Sossa - Star Song (ft. Lil Durk) [Official Audio].mp3" type="audio/mpeg">
+  </audio>
+  <button id="music-toggle" aria-label="Toggle background music"><span id="music-icon">🔇</span></button>
 
-.grid-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image:
-    linear-gradient(rgba(139, 124, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 124, 255, 0.06) 1px, transparent 1px);
-  background-size: 42px 42px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 40%, transparent 80%);
-          mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 40%, transparent 80%);
-}
+  <section id="cta">
+    <div class="btn-stack">
+      <button type="button" id="open-message-btn" class="btn btn-primary">Read my message</button>
+      <button type="button" class="btn btn-wish open-wish">Make a wish ✨</button>
+      <a href="#traits" class="btn btn-outline">About you</a>
+    </div>
+    <div id="wish-log" hidden>
+      <div class="eyebrow">Wishes sent up</div>
+      <ul id="wish-list"></ul>
+      <div class="log-actions">
+        <button type="button" id="share-wishes" class="btn btn-outline btn-sm">Send them to Arsene</button>
+        <button type="button" id="clear-wishes" class="btn-link">Clear</button>
+      </div>
+    </div>
+  </section>
 
-section {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 90px 24px;
-}
+  <section id="traits">
+    <div class="eyebrow">What you mean to me</div>
+    <h2 class="traits-title">The things I see in you</h2>
+    <div class="traits-list">
+      <div class="trait-card">
+        <span class="trait-icon small icon-diamond icon-violet"></span>
+        <div class="trait-title">Reliable(●'◡'●)</div>
+        <div class="trait-desc">Always there when it counts — no questions, no conditions.</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon small icon-diamond-outline icon-cyan"></span>
+        <div class="trait-title">Patient</div>
+        <div class="trait-desc">Your calm steadies everything around you. It's a gift</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon icon-circle icon-pink"></span>
+        <div class="trait-title">Caring</div>
+        <div class="trait-desc">Omg😭😂 idk why am nervous saying this😂..."My shaylaa😊💋",You notice what others miss, and you act on it without being asked at times❤😂.</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon small icon-diamond icon-green"></span>
+        <div class="trait-title">Little Menace😁</div>
+        <div class="trait-desc">Certified expert in pushing my Buttons😂😂.</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon icon-circle-outline icon-blue"></span>
+        <div class="trait-title">RageBaiter😭</div>
+        <div class="trait-desc">I like how at times you say peace is never the goal😂😂.</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon icon-half icon-orange"></span>
+        <div class="trait-title">GasLighter😢😂</div>
+        <div class="trait-desc">Kwani wewe hudo?😂😂.</div>
+      </div>
+    </div>
+  </section>
 
-.eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 14px;
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--violet);
-}
+  <footer id="footer">
+    <div class="eyebrow no-margin">With gratitude</div>
+    <div id="sparks"></div>
+    <p class="foot-line spaced">Made with gratitude · Happy Birthday</p>
+    <div class="foot-rule"></div>
+    <h3>L'art_de_Arsene</h3>
+  </footer>
+</div>
 
-.eyebrow::before,
-.eyebrow::after {
-  content: '';
-  width: 34px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--violet));
-}
+<div id="page-message">
+  <section>
+    <div class="content-layer">
+      <div class="eyebrow">A message for you</div>
+      <div class="msg-card" id="msg-card" title="Tap to skip the typing">
+        <p>I just want to take a moment to say thank you for always being there for me😍.</p>
+        <p>Through the good days and the tough ones😢, you've been someone I can rely on☺.</p>
+        <p>Your support, patience, and presence mean more to me than I always say🥺.</p>
+        <p>I truly appreciate you, and I'm grateful to have you in my life😁.</p>
+        <div class="msg-close">Happy Birthday❤💝.</div>
+      </div>
+      <div class="btn-stack after-msg" id="after-msg">
+        <button type="button" class="btn btn-wish open-wish">Make a wish ✨</button>
+        <button type="button" id="back-btn" class="btn btn-outline">Back to the start</button>
+      </div>
+    </div>
+  </section>
+</div>
 
-.eyebrow::after {
-  background: linear-gradient(90deg, var(--violet), transparent);
-}
-.content-layer {
-  position: relative;
-  z-index: 1;
-}
+<dialog id="wish-dialog" aria-labelledby="wish-title">
+  <div class="wish-card">
+    <button type="button" class="wish-x" id="wish-close" aria-label="Close">✕</button>
+    <h3 id="wish-title">Make a wish</h3>
+    <p class="wish-help">Type it, then send it up. It floats away in a bubble.</p>
+    <textarea id="wish-input" maxlength="140" rows="3" placeholder="I wish for…"></textarea>
+    <div class="wish-meta">
+      <div class="chips" id="chips">
+        <button type="button" class="chip">Endless laughs 😂</button>
+        <button type="button" class="chip">Peace, finally 🕊</button>
+        <button type="button" class="chip">Big dreams, coming true 🌟</button>
+      </div>
+      <span id="wish-count">0/140</span>
+    </div>
+    <button type="button" id="wish-send" class="btn btn-primary" disabled>Send it up</button>
+  </div>
+</dialog>
 
-.eyebrow.no-margin {
-  margin-bottom: 0;
-}
-#hero {
-  text-align: center;
-  padding-top: 70px;
-}
-
-.hero-title {
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 800;
-  font-size: clamp(46px, 10vw, 78px);
-  line-height: 1.05;
-  color: #fff;
-  text-shadow:
-    0 0 12px rgba(155, 107, 255, 0.9),
-    0 0 40px rgba(155, 107, 255, 0.55),
-    0 0 90px rgba(109, 91, 255, 0.35);
-}
-
-.hero-rule {
-  width: 120px;
-  height: 2px;
-  margin: 26px auto;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--pink), var(--violet), var(--cyan));
-  box-shadow: 0 0 12px rgba(155, 107, 255, 0.6);
-}
-
-.hero-sub {
-  max-width: 460px;
-  margin: 0 auto;
-  font-size: clamp(16px, 2.4vw, 19px);
-  color: #dfe1ff;
-  text-shadow: 0 0 18px rgba(139, 124, 255, 0.35);
-}
-.mock-wrap {
-  position: relative;
-  max-width: 340px;
-  margin: 54px auto 0;
-  padding: 22px;
-}
-
-.mock-corner {
-  position: absolute;
-  width: 26px;
-  height: 26px;
-}
-
-.mock-corner.tl {
-  top: 0;
-  left: 0;
-  border-top: 2px solid var(--pink);
-  border-left: 2px solid var(--pink);
-  border-radius: 6px 0 0 0;
-}
-
-.mock-corner.tr {
-  top: 0;
-  right: 0;
-  border-top: 2px solid var(--cyan);
-  border-right: 2px solid var(--cyan);
-  border-radius: 0 6px 0 0;
-}
-
-.mock-card {
-  background: #f3efe6;
-  border-radius: 14px;
-  padding: 26px 22px;
-  text-align: left;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-}
-
-.mock-eyebrow {
-  margin-bottom: 10px;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #b9739a;
-}
-
-.mock-name {
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: 21px;
-  line-height: 1.2;
-  color: #1c1830;
-}
-
-.mock-tag {
-  margin-top: 6px;
-  font-size: 12px;
-  font-style: italic;
-  color: #7a7690;
-}
-
-.mock-heart {
-  margin: 14px 0;
-  font-size: 18px;
-  color: var(--pink);
-}
-
-.mock-body {
-  font-size: 11px;
-  line-height: 1.6;
-  color: #8a869c;
-}
-#cta {
-  padding-top: 0;
-  text-align: center;
-}
-
-.btn-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  max-width: 340px;
-  margin: 0 auto;
-}
-#music-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #0a0a0a;
-  border: 1px solid #ff003c;
-  color: #ff003c;
-  font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-}
-#music-toggle:hover {
-  box-shadow: 0 0 18px rgba(255, 0, 60, 0.9);
-  transform: scale(1.05);
-}
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 16px 20px;
-  border-radius: 999px;
-  font-family: 'Space Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.btn:focus-visible {
-  outline: 2px solid var(--cyan);
-  outline-offset: 3px;
-}
-
-.btn-primary {
-  border: none;
-  background: linear-gradient(120deg, var(--violet-2), var(--violet));
-  color: #fff;
-  font-weight: 700;
-  box-shadow:
-    0 0 22px rgba(155, 107, 255, 0.55),
-    0 8px 30px rgba(109, 91, 255, 0.35);
-}
-
-.btn-primary:hover {
-  filter: brightness(1.08);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid rgba(155, 107, 255, 0.55);
-  color: var(--violet);
-}
-
-.btn-outline:hover {
-  background: rgba(155, 107, 255, 0.08);
-  border-color: var(--violet);
-}
-.btn-back {
-  max-width: 340px;
-  margin: 36px auto 0;
-}
-#page-message section {
-  padding-top: 70px;
-  text-align: center;
-}
-
-.msg-card {
-  position: relative;
-  padding: 40px 32px;
-  border: 1px solid transparent;
-  border-radius: var(--radius);
-  background: rgba(18, 18, 42, 0.6);
-  background-clip: padding-box;
-  text-align: left;
-}
-.msg-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: var(--radius);
-  background: linear-gradient(160deg, var(--pink), var(--violet) 40%, var(--cyan) 100%);
- -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.msg-card p {
-  margin-bottom: 18px;
-  font-size: 15px;
-  line-height: 1.75;
-  color: #dcdcf5;
-}
-
-.msg-card p:last-of-type {
-  margin-bottom: 0;
-}
-
-.msg-close {
-  margin-top: 26px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  color: #fff;
-  text-shadow: 0 0 20px rgba(155, 107, 255, 0.7);
-}
-
-.typing-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  margin-left: 2px;
-  background: currentColor;
-  vertical-align: text-bottom;
-  animation: cursor-blink 0.8s steps(1) infinite;
-}
-
-@keyframes cursor-blink {
-  50% { opacity: 0; }
-}
-
-#traits {
-  text-align: center;
-}
-
-.traits-title {
-  margin-top: 4px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: clamp(26px, 5vw, 34px);
-  color: #fff;
-}
-
-.traits-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 44px;
-  text-align: left;
-}
-
-@media (min-width: 720px) {
-  .traits-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.trait-card {
-  padding: 24px 22px;
-  border: 1px solid var(--card-line);
-  border-radius: var(--radius);
-  background: var(--card);
-}
-
-.trait-title {
-  margin-bottom: 8px;
-  font-family:'Montserrat',sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
-  font-weight: 400;
-  color: #fff;
-}
-
-.trait-desc {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--text-dim);
-}
-
-.trait-icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin-bottom: 16px;
-}
-
-.trait-icon.small {
-  width: 16px;
-  height: 16px;
-}
-
-.icon-diamond {
-  background: currentColor;
-  border-radius: 3px;
-  transform: rotate(45deg);
-}
-
-.icon-diamond-outline {
-  background: transparent;
-  border: 2px solid currentColor;
-  border-radius: 3px;
-  transform: rotate(45deg);
-}
-
-.icon-circle {
-  background: currentColor;
-  border-radius: 50%;
-}
-
-.icon-circle-outline {
-  background: transparent;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-}
-
-.icon-half {
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
-}
-.icon-violet { color: var(--violet); }
-.icon-cyan   { color: var(--cyan); }
-.icon-pink   { color: var(--pink); }
-.icon-green  { color: var(--green); }
-.icon-blue   { color: var(--blue); }
-.icon-orange { color: var(--orange); }
-footer {
-  position: relative;
-  overflow: hidden;
-  padding: 100px 24px 70px;
-  text-align: center;
-}
-
-.spark {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  opacity: 0.85;
-}
-
-.foot-line {
-  position: relative;
-  z-index: 1;
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.foot-line.spaced {
-  margin-top: 70px;
-}
-
-.foot-rule {
-  width: 90px;
-  height: 1px;
-  margin: 18px auto 0;
-  background: linear-gradient(90deg, transparent, var(--violet), transparent);
-}
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="birthday.js"></script>
+</body>
+</html>
