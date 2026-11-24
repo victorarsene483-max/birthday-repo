@@ -1,152 +1,174 @@
+#page-home,#page-message{display:none}
+#page-home.active,#page-message.active{display:block;animation:pagein .6s ease both}
+@keyframes pagein{from{opacity:0;transform:translateY(14px)}}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Day For You</title>
-<script defer src="/_vercel/insights/script.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="birthday.css">
-</head>
-<body>
-<div id="splash">
-  <div class="orb" aria-hidden="true"><span>🎂</span></div>
-  <p class="splash-line">A little something for you</p>
-  <button type="button" id="enter" class="btn btn-primary">Tap to open</button>
-</div>
-<div class="torch" aria-hidden="true"></div>
-<div id="bubbles" aria-hidden="true"></div>
+:root{
+  --bg:#0a0a16;--card:#12122a;--card-line:rgba(139,124,255,.18);
+  --violet:#9b6bff;--violet-2:#6d5bff;--pink:#ff5fa8;--cyan:#29e0e0;--green:#35e08a;--orange:#ffa64d;--blue:#5b9bff;
+  --text:#eef0ff;--text-dim:#9a9ab8;--radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100dvh}
+/* your background image, fixed so it stays put while content moves over it */
+body::before{content:"";position:fixed;inset:0;z-index:-2;
+  background:linear-gradient(180deg,rgba(6,20,40,.15),rgba(6,12,30,.72)),url("spongebob 5k.(2).webp") center/cover no-repeat}
+.torch{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,25%),rgba(255,255,255,.14),transparent 70%)}
+#bubbles{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.b{position:absolute;bottom:-140px;border-radius:50%;pointer-events:auto;cursor:pointer;
+  background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.85) 0 7%,rgba(255,255,255,.16) 8% 45%,rgba(120,220,255,.1) 70%,rgba(255,255,255,.35) 100%);
+  box-shadow:inset 0 0 14px rgba(255,255,255,.3);animation:rise linear forwards}
+@keyframes rise{to{transform:translate3d(var(--dx),-125vh,0)}}
+.b.pop{animation:none;transition:transform .25s,opacity .25s;transform:scale(1.7);opacity:0}
 
-<div id="page-home" class="active">
+section{position:relative;max-width:900px;margin:0 auto;padding:90px 24px}
+.content-layer{position:relative;z-index:1}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#b9a6ff}
+.eyebrow::before,.eyebrow::after{content:'';width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--violet))}
+.eyebrow::after{background:linear-gradient(90deg,var(--violet),transparent)}
+.eyebrow.no-margin{margin-bottom:0}
 
-  <section id="hero">
-    <div class="content-layer">
-      <div class="eyebrow">A day for you</div>
-      <h1 class="hero-title" aria-label="Happy Birthday"><span class="ln">Happy</span><span class="ln">Birthday</span></h1>
-      <div class="hero-rule"></div>
-      <p class="hero-sub">Pop a few bubbles on your way down.</p>
+#hero{text-align:center;padding-top:70px}
+.hero-title{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(52px,13vw,96px);line-height:1.02;color:#fff;
+  text-shadow:0 0 12px rgba(155,107,255,.9),0 0 40px rgba(155,107,255,.55),0 0 90px rgba(109,91,255,.35)}
+.hero-title .ln{display:block}
+.hero-title .l{display:inline-block;animation:wave 1.3s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(var(--i)*55ms);transition:color .2s}
+.hero-title .l:hover{color:#ffd84d;transform:translateY(-8px) rotate(-5deg)}
+@keyframes wave{from{transform:translateY(60px) scale(.6);opacity:0}}
+.hero-rule{width:120px;height:2px;margin:26px auto;border-radius:2px;background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));box-shadow:0 0 12px rgba(155,107,255,.6);animation:grow 1.2s .8s both}
+@keyframes grow{from{width:0}}
+.hero-sub{max-width:460px;margin:0 auto;font-size:clamp(16px,2.4vw,19px);color:#dfe1ff}
 
-      <div class="mock-wrap">
-        <div class="mock-corner tl"></div>
-        <div class="mock-corner tr"></div>
-        <div class="mock-card">
-          <div class="mock-eyebrow">✦ happy birthday</div>
-          <div class="mock-name">To <span id="mock-name-text">My Screen Soulmate🤗</span></div>
-          <div class="mock-tag">Bestieeeee😉</div>
-          <div class="mock-heart">❤</div>
-          <div class="mock-body">On your special day, I just want to share something as unique and beautiful as you are — a small reminder of how much you mean to me, and how lucky I am to walk through life beside you.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+.mock-wrap{position:relative;max-width:340px;margin:54px auto 0;padding:22px;animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.mock-corner{position:absolute;width:26px;height:26px}
+.mock-corner.tl{top:0;left:0;border-top:2px solid var(--pink);border-left:2px solid var(--pink);border-radius:6px 0 0 0}
+.mock-corner.tr{top:0;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);border-radius:0 6px 0 0}
+.mock-card{background:#f3efe6;border-radius:14px;padding:26px 22px;text-align:left;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+.mock-eyebrow{margin-bottom:10px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#b9739a}
+.mock-name{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:21px;line-height:1.2;color:#1c1830}
+.mock-tag{margin-top:6px;font-size:12px;font-style:italic;color:#7a7690}
+.mock-heart{margin:14px 0;font-size:18px;color:var(--pink);display:inline-block;animation:beat 1.4s infinite}
+@keyframes beat{15%{transform:scale(1.35)}30%{transform:scale(1)}}
+.mock-body{font-size:12px;line-height:1.6;color:#6f6b84}
 
-  <audio id="bg-music" loop preload="auto">
-    <source src="Sally Sossa - Star Song (ft. Lil Durk) [Official Audio].mp3" type="audio/mpeg">
-  </audio>
-  <button id="music-toggle" aria-label="Toggle background music"><span id="music-icon">🔇</span></button>
+#cta{padding-top:0;text-align:center}
+.btn-stack{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:340px;margin:0 auto}
+.btn{display:block;width:100%;padding:16px 20px;border-radius:999px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-align:center;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .2s,filter .2s,background .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn:focus-visible,.chip:focus-visible,.wish-x:focus-visible,.btn-link:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.btn-primary{border:none;background:linear-gradient(120deg,var(--violet-2),var(--violet));color:#fff;font-weight:700;box-shadow:0 0 22px rgba(155,107,255,.55),0 8px 30px rgba(109,91,255,.35)}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-wish{border:none;color:#fff;font-weight:700;background:linear-gradient(120deg,var(--pink),#ff9a5f);box-shadow:0 0 22px rgba(255,95,168,.45)}
+.btn-outline{background:rgba(10,10,22,.35);border:1px solid rgba(155,107,255,.6);color:#d3c6ff}
+.btn-outline:hover{background:rgba(155,107,255,.15)}
+.btn-sm{padding:12px 18px;font-size:11px}
+.after-msg{margin-top:36px;opacity:0;pointer-events:none;transition:opacity .6s}
+.after-msg.show{opacity:1;pointer-events:auto}
 
-  <section id="cta">
-    <div class="btn-stack">
-      <button type="button" id="open-message-btn" class="btn btn-primary">Read my message</button>
-      <button type="button" class="btn btn-wish open-wish">Make a wish ✨</button>
-      <a href="#traits" class="btn btn-outline">About you</a>
-    </div>
-    <div id="wish-log" hidden>
-      <div class="eyebrow">Wishes sent up</div>
-      <ul id="wish-list"></ul>
-      <div class="log-actions">
-        <button type="button" id="share-wishes" class="btn btn-outline btn-sm">Send them to Arsene</button>
-        <button type="button" id="clear-wishes" class="btn-link">Clear</button>
-      </div>
-    </div>
-  </section>
+#music-toggle{position:fixed;bottom:20px;right:20px;width:48px;height:48px;border-radius:50%;background:#0a0a0a;border:1px solid #ff003c;color:#ff003c;font-size:1.2rem;cursor:pointer;z-index:999;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px rgba(255,0,60,.5);transition:box-shadow .3s,transform .2s}
+#music-toggle:hover{box-shadow:0 0 18px rgba(255,0,60,.9);transform:scale(1.05)}
 
-  <section id="traits">
-    <div class="eyebrow">What you mean to me</div>
-    <h2 class="traits-title">The things I see in you</h2>
-    <div class="traits-list">
-      <div class="trait-card">
-        <span class="trait-icon small icon-diamond icon-violet"></span>
-        <div class="trait-title">Reliable(●'◡'●)</div>
-        <div class="trait-desc">Always there when it counts — no questions, no conditions.</div>
-      </div>
-      <div class="trait-card">
-        <span class="trait-icon small icon-diamond-outline icon-cyan"></span>
-        <div class="trait-title">Patient</div>
-        <div class="trait-desc">Your calm steadies everything around you. It's a gift</div>
-      </div>
-      <div class="trait-card">
-        <span class="trait-icon icon-circle icon-pink"></span>
-        <div class="trait-title">Caring</div>
-        <div class="trait-desc">Omg😭😂 idk why am nervous saying this😂..."My shaylaa😊💋",You notice what others miss, and you act on it without being asked at times❤😂.</div>
-      </div>
-      <div class="trait-card">
-        <span class="trait-icon small icon-diamond icon-green"></span>
-        <div class="trait-title">Little Menace😁</div>
-        <div class="trait-desc">Certified expert in pushing my Buttons😂😂.</div>
-      </div>
-      <div class="trait-card">
-        <span class="trait-icon icon-circle-outline icon-blue"></span>
-        <div class="trait-title">RageBaiter😭</div>
-        <div class="trait-desc">I like how at times you say peace is never the goal😂😂.</div>
-      </div>
-      <div class="trait-card">
-        <span class="trait-icon icon-half icon-orange"></span>
-        <div class="trait-title">GasLighter😢😂</div>
-        <div class="trait-desc">Kwani wewe hudo?😂😂.</div>
-      </div>
-    </div>
-  </section>
+#wish-log{max-width:520px;margin:46px auto 0}
+#wish-list{list-style:none;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+#wish-list li{padding:8px 14px;border-radius:999px;font-size:13px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);animation:pagein .5s both}
+.log-actions{display:flex;gap:16px;justify-content:center;align-items:center;margin-top:16px}
+.log-actions .btn{width:auto}
+.btn-link{background:none;border:0;color:var(--text-dim);font:500 13px Inter,sans-serif;text-decoration:underline;cursor:pointer}
 
-  <footer id="footer">
-    <div class="eyebrow no-margin">With gratitude</div>
-    <div id="sparks"></div>
-    <p class="foot-line spaced">Made with gratitude · Happy Birthday</p>
-    <div class="foot-rule"></div>
-    <h3>L'art_de_Arsene</h3>
-  </footer>
-</div>
+#page-message section{padding-top:70px;text-align:center}
+.msg-card{position:relative;padding:40px 32px;border-radius:var(--radius);background:rgba(18,18,42,.72);backdrop-filter:blur(8px);text-align:left;cursor:pointer}
+.msg-card::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius);background:linear-gradient(160deg,var(--pink),var(--violet) 40%,var(--cyan));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.8;pointer-events:none}
+.msg-card p{margin-bottom:18px;font-size:16px;line-height:1.75;color:#e4e4fa;min-height:1.75em}
+.msg-close{margin-top:26px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:24px;color:#fff;text-shadow:0 0 20px rgba(155,107,255,.7)}
+.typing-cursor{display:inline-block;width:2px;height:1em;margin-left:2px;background:currentColor;vertical-align:text-bottom;animation:cb .8s steps(1) infinite}
+@keyframes cb{50%{opacity:0}}
 
-<div id="page-message">
-  <section>
-    <div class="content-layer">
-      <div class="eyebrow">A message for you</div>
-      <div class="msg-card" id="msg-card" title="Tap to skip the typing">
-        <p>I just want to take a moment to say thank you for always being there for me😍.</p>
-        <p>Through the good days and the tough ones😢, you've been someone I can rely on☺.</p>
-        <p>Your support, patience, and presence mean more to me than I always say🥺.</p>
-        <p>I truly appreciate you, and I'm grateful to have you in my life😁.</p>
-        <div class="msg-close">Happy Birthday❤💝.</div>
-      </div>
-      <div class="btn-stack after-msg" id="after-msg">
-        <button type="button" class="btn btn-wish open-wish">Make a wish ✨</button>
-        <button type="button" id="back-btn" class="btn btn-outline">Back to the start</button>
-      </div>
-    </div>
-  </section>
-</div>
+#traits{text-align:center}
+.traits-title{margin-top:4px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(28px,5vw,38px);color:#fff}
+.traits-list{display:flex;flex-direction:column;gap:16px;margin-top:44px;text-align:left}
+@media(min-width:720px){.traits-list{display:grid;grid-template-columns:repeat(2,1fr)}}
+.trait-card{padding:24px 22px;border:1px solid var(--card-line);border-radius:var(--radius);background:rgba(18,18,42,.82);backdrop-filter:blur(6px);opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s cubic-bezier(.2,.9,.3,1.2),border-color .3s,box-shadow .3s;transition-delay:var(--d,0s)}
+.trait-card.in{opacity:1;transform:none}
+.trait-card.in:hover{transform:translateY(-6px) rotate(-.6deg);border-color:rgba(155,107,255,.6);box-shadow:0 14px 40px rgba(109,91,255,.3);transition-delay:0s}
+.trait-title{margin-bottom:8px;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:lowercase;color:#fff}
+.trait-desc{font-size:14px;line-height:1.55;color:#b4b4cf}
+.trait-icon{display:block;width:20px;height:20px;margin-bottom:16px;transition:transform .5s}
+.trait-icon.small{width:16px;height:16px}
+.trait-card:hover .trait-icon{transform:rotate(225deg) scale(1.2)}
+.icon-diamond{background:currentColor;border-radius:3px;transform:rotate(45deg)}
+.icon-diamond-outline{border:2px solid currentColor;border-radius:3px;transform:rotate(45deg)}
+.icon-circle{background:currentColor;border-radius:50%}
+.icon-circle-outline{border:2px solid currentColor;border-radius:50%}
+.icon-half{border:2px solid currentColor;border-radius:50%;background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.icon-violet{color:var(--violet)}.icon-cyan{color:var(--cyan)}.icon-pink{color:var(--pink)}.icon-green{color:var(--green)}.icon-blue{color:var(--blue)}.icon-orange{color:var(--orange)}
 
-<dialog id="wish-dialog" aria-labelledby="wish-title">
-  <div class="wish-card">
-    <button type="button" class="wish-x" id="wish-close" aria-label="Close">✕</button>
-    <h3 id="wish-title">Make a wish</h3>
-    <p class="wish-help">Type it, then send it up. It floats away in a bubble.</p>
-    <textarea id="wish-input" maxlength="140" rows="3" placeholder="I wish for…"></textarea>
-    <div class="wish-meta">
-      <div class="chips" id="chips">
-        <button type="button" class="chip">Endless laughs 😂</button>
-        <button type="button" class="chip">Peace, finally 🕊</button>
-        <button type="button" class="chip">Big dreams, coming true 🌟</button>
-      </div>
-      <span id="wish-count">0/140</span>
-    </div>
-    <button type="button" id="wish-send" class="btn btn-primary" disabled>Send it up</button>
-  </div>
-</dialog>
+footer{position:relative;overflow:hidden;padding:100px 24px 70px;text-align:center}
+.spark{position:absolute;width:5px;height:5px;border-radius:50%;opacity:.85;animation:tw 3s ease-in-out infinite alternate}
+@keyframes tw{to{opacity:.15;transform:translateY(-14px)}}
+.foot-line{position:relative;z-index:1;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#b4b4cf}
+.foot-line.spaced{margin-top:70px}
+.foot-rule{width:90px;height:1px;margin:18px auto 0;background:linear-gradient(90deg,transparent,var(--violet),transparent)}
+footer h3{position:relative;z-index:1;margin-top:14px;font-family:'Baloo 2',sans-serif;font-weight:600;color:#fff}
 
-<div id="toast" role="status" aria-live="polite"></div>
-<script src="birthday.js"></script>
-</body>
-</html>
+/* wish dialog */
+dialog{border:0;padding:0;background:transparent;width:min(440px,92vw);color:var(--text);margin:auto}
+dialog::backdrop{background:rgba(3,10,26,.72);backdrop-filter:blur(6px)}
+.wish-card{position:relative;padding:32px 26px 26px;border-radius:22px;background:#12122a;border:1px solid var(--card-line);box-shadow:0 30px 80px rgba(0,0,0,.6);animation:pagein .4s both}
+.wish-card h3{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:28px}
+.wish-help{color:var(--text-dim);font-size:14px;margin:4px 0 16px}
+.wish-x{position:absolute;top:12px;right:14px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
+textarea{width:100%;resize:none;padding:14px;border-radius:14px;border:1px solid rgba(155,107,255,.4);background:rgba(255,255,255,.05);color:#fff;font:16px/1.5 Inter,sans-serif}
+textarea:focus{outline:2px solid var(--violet);outline-offset:1px}
+.wish-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin:12px 0 18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#e9e9ff;border-radius:999px;padding:6px 12px;font:12px Inter,sans-serif;cursor:pointer;transition:background .2s}
+.chip:hover{background:rgba(155,107,255,.3)}
+#wish-count{font:11px 'Space Mono',monospace;color:var(--text-dim);white-space:nowrap}
+
+/* wish bubble that floats away */
+.wish-bubble{position:fixed;left:50%;bottom:-200px;z-index:60;width:180px;height:180px;margin-left:-90px;border-radius:50%;display:grid;place-items:center;padding:26px;text-align:center;font:600 14px/1.3 'Baloo 2',sans-serif;color:#fff;
+  background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.7) 0 6%,rgba(255,255,255,.14) 8% 50%,rgba(255,122,184,.2) 100%);border:1.5px solid rgba(255,255,255,.55);box-shadow:inset 0 0 30px rgba(255,255,255,.3),0 0 40px rgba(255,122,184,.45);
+  animation:wishup 4.2s cubic-bezier(.3,.6,.4,1) forwards}
+@keyframes wishup{0%{transform:translate(0,0) scale(.6)}60%{transform:translate(30px,-60vh) scale(1)}100%{transform:translate(-20px,-110vh) scale(1.1)}}
+.sparkle{position:fixed;pointer-events:none;z-index:70;border-radius:50%;animation:burst 1.2s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--bx),var(--by)) scale(.2);opacity:0}}
+#toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;z-index:100;padding:12px 20px;border-radius:999px;background:#fff;color:#1c1830;font:600 14px Inter,sans-serif;opacity:0;pointer-events:none;transition:.4s}
+#toast.show{opacity:1;translate:-50% 0}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+
+/* ================= LOAD ANIMATIONS ================= */
+body:not(.ready){overflow:hidden}
+
+/* intro splash */
+#splash{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:24px;text-align:center;
+  background:radial-gradient(ellipse at 50% 30%,#14558a 0%,#08284a 55%,#040f22 100%);
+  transition:opacity .9s ease,transform .9s ease,filter .9s ease}
+#splash.leaving{opacity:0;transform:scale(1.15);filter:blur(10px);pointer-events:none}
+#splash .btn{width:auto;min-width:220px;animation:enter .8s 1.1s both}
+.orb{position:relative;width:128px;height:128px;border-radius:50%;display:grid;place-items:center;font-size:52px;
+  background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.85) 0 6%,rgba(255,255,255,.16) 8% 50%,rgba(120,220,255,.14) 72%,rgba(255,255,255,.4) 100%);
+  box-shadow:inset 0 0 28px rgba(255,255,255,.35),0 0 60px rgba(63,182,217,.45);
+  animation:orbin 1s cubic-bezier(.2,.9,.3,1.3) both,orbfloat 3.2s 1s ease-in-out infinite}
+.orb::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);animation:ring 2.4s 1s ease-out infinite}
+@keyframes orbin{from{transform:scale(0) rotate(-40deg);opacity:0}}
+@keyframes orbfloat{50%{transform:translateY(-12px) scale(1.04)}}
+@keyframes ring{from{transform:scale(.8);opacity:.8}to{transform:scale(1.5);opacity:0}}
+.splash-line{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(24px,6vw,34px);color:#fff;text-shadow:0 0 24px rgba(155,107,255,.8);animation:enter .9s .5s both}
+
+/* page content waits behind the splash, then plays as one sequence */
+@keyframes enter{from{opacity:0;transform:translateY(26px) scale(.96)}}
+#hero .eyebrow,.hero-sub,.mock-card,#cta .btn,#music-toggle{animation:enter .9s cubic-bezier(.2,.9,.3,1.2) both}
+#hero .eyebrow{animation-delay:.1s}
+.hero-sub{animation-delay:1.3s}
+.mock-card{animation:drop 1.1s 1.5s cubic-bezier(.2,.9,.3,1.25) both}
+@keyframes drop{from{opacity:0;transform:translateY(-70px) rotate(-6deg) scale(.9)}}
+#cta .btn:nth-child(1){animation-delay:2s}
+#cta .btn:nth-child(2){animation-delay:2.15s}
+#cta .btn:nth-child(3){animation-delay:2.3s}
+#music-toggle{animation-delay:2.5s}
+.hero-title .l{animation-delay:calc(.35s + var(--i)*60ms)}
+.hero-rule{animation-delay:1.1s}
+body:not(.ready) #page-home *{animation-play-state:paused!important}
