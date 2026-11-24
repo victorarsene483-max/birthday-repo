@@ -414,7 +414,6 @@ function typeMessage() {
   const myRun = ++runId;
   afterMsg.classList.remove('show');
   msgEls.forEach(el => { el.textContent = ''; });
-  if (reduce) return finishTyping();
   let elIndex = 0;
 
   function typeElement() {
