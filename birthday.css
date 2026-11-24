@@ -12,7 +12,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100dvh}
 /* your background image, fixed so it stays put while content moves over it */
 body::before{content:"";position:fixed;inset:0;z-index:-2;
-  background:linear-gradient(180deg,rgba(6,20,40,.15),rgba(6,12,30,.72)),url("spongebob 5k.(2).webp") center/cover no-repeat}
+  background:linear-gradient(180deg,rgba(6,20,40,.15),rgba(6,12,30,.72)),url("spongebob%205k.%20(2).webp") center/cover no-repeat}
 .torch{position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:radial-gradient(340px circle at var(--mx,50%) var(--my,25%),rgba(255,255,255,.14),transparent 70%)}
 #bubbles{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
