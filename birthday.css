@@ -1,3 +1,10 @@
+
+:root{
+  --font-display:'Inter',sans-serif;
+  --font-mono:'Inter',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+
 #page-home,#page-message{display:none}
 #page-home.active,#page-message.active{display:block;animation:pagein .6s ease both}
 @keyframes pagein{from{opacity:0;transform:translateY(14px)}}
@@ -9,7 +16,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100dvh}
+/* >>> FONT: BODY font (text) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;min-height:100dvh}
 /* your background image, fixed so it stays put while content moves over it */
 body::before{content:"";position:fixed;inset:0;z-index:-2;
   background:linear-gradient(180deg,rgba(6,20,40,.15),rgba(6,12,30,.72)),url("spongebob%205k.%20(2).webp") center/cover no-repeat}
@@ -24,13 +32,15 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;
 
 section{position:relative;max-width:900px;margin:0 auto;padding:90px 24px}
 .content-layer{position:relative;z-index:1}
-.eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#b9a6ff}
+/* >>> FONT: MONO font (labels, buttons) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;font-family:var(--font-mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#b9a6ff}
 .eyebrow::before,.eyebrow::after{content:'';width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--violet))}
 .eyebrow::after{background:linear-gradient(90deg,var(--violet),transparent)}
 .eyebrow.no-margin{margin-bottom:0}
 
 #hero{text-align:center;padding-top:70px}
-.hero-title{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(52px,13vw,96px);line-height:1.02;color:#fff;
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.hero-title{font-family:var(--font-display);font-weight:800;font-size:clamp(52px,13vw,96px);line-height:1.02;color:#fff;
   text-shadow:0 0 12px rgba(155,107,255,.9),0 0 40px rgba(155,107,255,.55),0 0 90px rgba(109,91,255,.35)}
 .hero-title .ln{display:block}
 .hero-title .l{display:inline-block;animation:wave 1.3s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(var(--i)*55ms);transition:color .2s}
@@ -47,7 +57,8 @@ section{position:relative;max-width:900px;margin:0 auto;padding:90px 24px}
 .mock-corner.tr{top:0;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);border-radius:0 6px 0 0}
 .mock-card{background:#f3efe6;border-radius:14px;padding:26px 22px;text-align:left;box-shadow:0 20px 60px rgba(0,0,0,.55)}
 .mock-eyebrow{margin-bottom:10px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#b9739a}
-.mock-name{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:21px;line-height:1.2;color:#1c1830}
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.mock-name{font-family:var(--font-display);font-weight:700;font-size:21px;line-height:1.2;color:#1c1830}
 .mock-tag{margin-top:6px;font-size:12px;font-style:italic;color:#7a7690}
 .mock-heart{margin:14px 0;font-size:18px;color:var(--pink);display:inline-block;animation:beat 1.4s infinite}
 @keyframes beat{15%{transform:scale(1.35)}30%{transform:scale(1)}}
@@ -55,7 +66,8 @@ section{position:relative;max-width:900px;margin:0 auto;padding:90px 24px}
 
 #cta{padding-top:0;text-align:center}
 .btn-stack{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:340px;margin:0 auto}
-.btn{display:block;width:100%;padding:16px 20px;border-radius:999px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-align:center;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .2s,filter .2s,background .2s}
+/* >>> FONT: MONO font (labels, buttons) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.btn{display:block;width:100%;padding:16px 20px;border-radius:999px;font-family:var(--font-mono);font-size:13px;letter-spacing:.12em;text-align:center;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .2s,filter .2s,background .2s}
 .btn:hover{transform:translateY(-3px)}
 .btn:focus-visible,.chip:focus-visible,.wish-x:focus-visible,.btn-link:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 .btn-primary{border:none;background:linear-gradient(120deg,var(--violet-2),var(--violet));color:#fff;font-weight:700;box-shadow:0 0 22px rgba(155,107,255,.55),0 8px 30px rgba(109,91,255,.35)}
@@ -76,24 +88,28 @@ section{position:relative;max-width:900px;margin:0 auto;padding:90px 24px}
 #wish-list li{padding:8px 14px;border-radius:999px;font-size:13px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);animation:pagein .5s both}
 .log-actions{display:flex;gap:16px;justify-content:center;align-items:center;margin-top:16px}
 .log-actions .btn{width:auto}
-.btn-link{background:none;border:0;color:var(--text-dim);font:500 13px Inter,sans-serif;text-decoration:underline;cursor:pointer}
+/* >>> FONT: BODY font (text) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.btn-link{background:none;border:0;color:var(--text-dim);font:500 13px var(--font-body);text-decoration:underline;cursor:pointer}
 
 #page-message section{padding-top:70px;text-align:center}
 .msg-card{position:relative;padding:40px 32px;border-radius:var(--radius);background:rgba(18,18,42,.72);backdrop-filter:blur(8px);text-align:left;cursor:pointer}
 .msg-card::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius);background:linear-gradient(160deg,var(--pink),var(--violet) 40%,var(--cyan));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.8;pointer-events:none}
 .msg-card p{margin-bottom:18px;font-size:16px;line-height:1.75;color:#e4e4fa;min-height:1.75em}
-.msg-close{margin-top:26px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:24px;color:#fff;text-shadow:0 0 20px rgba(155,107,255,.7)}
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.msg-close{margin-top:26px;font-family:var(--font-display);font-weight:700;font-size:24px;color:#fff;text-shadow:0 0 20px rgba(155,107,255,.7)}
 .typing-cursor{display:inline-block;width:2px;height:1em;margin-left:2px;background:currentColor;vertical-align:text-bottom;animation:cb .8s steps(1) infinite}
 @keyframes cb{50%{opacity:0}}
 
 #traits{text-align:center}
-.traits-title{margin-top:4px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(28px,5vw,38px);color:#fff}
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.traits-title{margin-top:4px;font-family:var(--font-display);font-weight:700;font-size:clamp(28px,5vw,38px);color:#fff}
 .traits-list{display:flex;flex-direction:column;gap:16px;margin-top:44px;text-align:left}
 @media(min-width:720px){.traits-list{display:grid;grid-template-columns:repeat(2,1fr)}}
 .trait-card{padding:24px 22px;border:1px solid var(--card-line);border-radius:var(--radius);background:rgba(18,18,42,.82);backdrop-filter:blur(6px);opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s cubic-bezier(.2,.9,.3,1.2),border-color .3s,box-shadow .3s;transition-delay:var(--d,0s)}
 .trait-card.in{opacity:1;transform:none}
 .trait-card.in:hover{transform:translateY(-6px) rotate(-.6deg);border-color:rgba(155,107,255,.6);box-shadow:0 14px 40px rgba(109,91,255,.3);transition-delay:0s}
-.trait-title{margin-bottom:8px;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:lowercase;color:#fff}
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.trait-title{margin-bottom:8px;font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:lowercase;color:#fff}
 .trait-desc{font-size:14px;line-height:1.55;color:#b4b4cf}
 .trait-icon{display:block;width:20px;height:20px;margin-bottom:16px;transition:transform .5s}
 .trait-icon.small{width:16px;height:16px}
@@ -108,34 +124,42 @@ section{position:relative;max-width:900px;margin:0 auto;padding:90px 24px}
 footer{position:relative;overflow:hidden;padding:100px 24px 70px;text-align:center}
 .spark{position:absolute;width:5px;height:5px;border-radius:50%;opacity:.85;animation:tw 3s ease-in-out infinite alternate}
 @keyframes tw{to{opacity:.15;transform:translateY(-14px)}}
-.foot-line{position:relative;z-index:1;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#b4b4cf}
+/* >>> FONT: MONO font (labels, buttons) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.foot-line{position:relative;z-index:1;font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#b4b4cf}
 .foot-line.spaced{margin-top:70px}
 .foot-rule{width:90px;height:1px;margin:18px auto 0;background:linear-gradient(90deg,transparent,var(--violet),transparent)}
-footer h3{position:relative;z-index:1;margin-top:14px;font-family:'Baloo 2',sans-serif;font-weight:600;color:#fff}
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+footer h3{position:relative;z-index:1;margin-top:14px;font-family:var(--font-display);font-weight:600;color:#fff}
 
 /* wish dialog */
 dialog{border:0;padding:0;background:transparent;width:min(440px,92vw);color:var(--text);margin:auto}
 dialog::backdrop{background:rgba(3,10,26,.72);backdrop-filter:blur(6px)}
 .wish-card{position:relative;padding:32px 26px 26px;border-radius:22px;background:#12122a;border:1px solid var(--card-line);box-shadow:0 30px 80px rgba(0,0,0,.6);animation:pagein .4s both}
-.wish-card h3{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:28px}
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.wish-card h3{font-family:var(--font-display);font-weight:700;font-size:28px}
 .wish-help{color:var(--text-dim);font-size:14px;margin:4px 0 16px}
 .wish-x{position:absolute;top:12px;right:14px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
-textarea{width:100%;resize:none;padding:14px;border-radius:14px;border:1px solid rgba(155,107,255,.4);background:rgba(255,255,255,.05);color:#fff;font:16px/1.5 Inter,sans-serif}
+/* >>> FONT: BODY font (text) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+textarea{width:100%;resize:none;padding:14px;border-radius:14px;border:1px solid rgba(155,107,255,.4);background:rgba(255,255,255,.05);color:#fff;font:16px/1.5 var(--font-body)}
 textarea:focus{outline:2px solid var(--violet);outline-offset:1px}
 .wish-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin:12px 0 18px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#e9e9ff;border-radius:999px;padding:6px 12px;font:12px Inter,sans-serif;cursor:pointer;transition:background .2s}
+/* >>> FONT: BODY font (text) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.chip{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#e9e9ff;border-radius:999px;padding:6px 12px;font:12px var(--font-body);cursor:pointer;transition:background .2s}
 .chip:hover{background:rgba(155,107,255,.3)}
-#wish-count{font:11px 'Space Mono',monospace;color:var(--text-dim);white-space:nowrap}
+/* >>> FONT: MONO font (labels, buttons) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+#wish-count{font:11px var(--font-mono);color:var(--text-dim);white-space:nowrap}
 
 /* wish bubble that floats away */
-.wish-bubble{position:fixed;left:50%;bottom:-200px;z-index:60;width:180px;height:180px;margin-left:-90px;border-radius:50%;display:grid;place-items:center;padding:26px;text-align:center;font:600 14px/1.3 'Baloo 2',sans-serif;color:#fff;
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.wish-bubble{position:fixed;left:50%;bottom:-200px;z-index:60;width:180px;height:180px;margin-left:-90px;border-radius:50%;display:grid;place-items:center;padding:26px;text-align:center;font:600 14px/1.3 var(--font-display);color:#fff;
   background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.7) 0 6%,rgba(255,255,255,.14) 8% 50%,rgba(255,122,184,.2) 100%);border:1.5px solid rgba(255,255,255,.55);box-shadow:inset 0 0 30px rgba(255,255,255,.3),0 0 40px rgba(255,122,184,.45);
   animation:wishup 4.2s cubic-bezier(.3,.6,.4,1) forwards}
 @keyframes wishup{0%{transform:translate(0,0) scale(.6)}60%{transform:translate(30px,-60vh) scale(1)}100%{transform:translate(-20px,-110vh) scale(1.1)}}
 .sparkle{position:fixed;pointer-events:none;z-index:70;border-radius:50%;animation:burst 1.2s ease-out forwards}
 @keyframes burst{to{transform:translate(var(--bx),var(--by)) scale(.2);opacity:0}}
-#toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;z-index:100;padding:12px 20px;border-radius:999px;background:#fff;color:#1c1830;font:600 14px Inter,sans-serif;opacity:0;pointer-events:none;transition:.4s}
+/* >>> FONT: BODY font (text) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+#toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;z-index:100;padding:12px 20px;border-radius:999px;background:#fff;color:#1c1830;font:600 14px var(--font-body);opacity:0;pointer-events:none;transition:.4s}
 #toast.show{opacity:1;translate:-50% 0}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
 
@@ -156,7 +180,8 @@ body:not(.ready){overflow:hidden}
 @keyframes orbin{from{transform:scale(0) rotate(-40deg);opacity:0}}
 @keyframes orbfloat{50%{transform:translateY(-12px) scale(1.04)}}
 @keyframes ring{from{transform:scale(.8);opacity:.8}to{transform:scale(1.5);opacity:0}}
-.splash-line{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(24px,6vw,34px);color:#fff;text-shadow:0 0 24px rgba(155,107,255,.8);animation:enter .9s .5s both}
+/* >>> FONT: DISPLAY font (headings) -> uses --font-display / --font-mono / --font-body from the FONT SETTINGS block at the top */
+.splash-line{font-family:var(--font-display);font-weight:700;font-size:clamp(24px,6vw,34px);color:#fff;text-shadow:0 0 24px rgba(155,107,255,.8);animation:enter .9s .5s both}
 
 /* page content waits behind the splash, then plays as one sequence */
 @keyframes enter{from{opacity:0;transform:translateY(26px) scale(.96)}}
